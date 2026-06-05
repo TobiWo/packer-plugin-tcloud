@@ -1,6 +1,7 @@
 <!-- Code generated from the comments of the ImageConfig struct in builder/openstack/image_config.go; DO NOT EDIT MANUALLY -->
 
-- `metadata` (map[string]string) - Glance metadata that will be applied to the image.
+- `metadata` (map[string]string) - Glance metadata applied to OpenStack-created images. Not supported with
+  image_creation_method "otc".
 
 - `image_visibility` (imageservice.ImageVisibility) - One of "public", "private", "shared", or "community".
 
@@ -18,6 +19,12 @@
 - `image_tags` ([]string) - List of tags to add to the image after creation.
 
 - `image_min_disk` (int) - Minimum disk size needed to boot image, in gigabytes.
+
+- `image_creation_method` (string) - Image creation method. Defaults to "openstack". Set to "otc" to create an OTC/T-Cloud Public IMS system disk image from the stopped build ECS.
+
+- `otc_ims_endpoint` (string) - OTC IMS API endpoint. Defaults to https://ims.&lt;region&gt;.otc.t-systems.com when omitted.
+
+- `otc_enterprise_project_id` (string) - OTC enterprise project ID assigned to the IMS image. Omitted when empty.
 
 - `skip_create_image` (bool) - Skip creating the image. Useful for setting to `true` during a build test stage. Defaults to `false`.
 

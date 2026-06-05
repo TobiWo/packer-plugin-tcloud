@@ -24,9 +24,12 @@ func (s *stepUpdateImageTags) Run(ctx context.Context, state multistep.StateBag)
 		return multistep.ActionContinue
 	}
 
-	imageId := state.Get("image").(string)
+	imageID := state.Get("image").(string)
 
 	if len(config.ImageTags) == 0 {
+		return multistep.ActionContinue
+	}
+	if config.ImageCreationMethod == imageCreationMethodOTC {
 		return multistep.ActionContinue
 	}
 	imageClient, err := config.imageV2Client()
@@ -39,7 +42,7 @@ func (s *stepUpdateImageTags) Run(ctx context.Context, state multistep.StateBag)
 	ui.Say(fmt.Sprintf("Updating image tags to %s", strings.Join(config.ImageTags, ", ")))
 	r := imageservice.Update(
 		imageClient,
-		imageId,
+		imageID,
 		imageservice.UpdateOpts{
 			imageservice.ReplaceImageTags{
 				NewTags: config.ImageTags,
