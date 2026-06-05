@@ -1,6 +1,18 @@
 # Packer Plugin Openstack
+
 The `Openstack` multi-component plugin can be used with HashiCorp [Packer](https://www.packer.io)
 to create custom images. For the full list of available features for this plugin see [docs](docs).
+
+## About this fork
+
+This fork keeps the upstream OpenStack builder mostly intact, but adds
+targeted changes for T-Cloud Public, formerly Open Telekom Cloud or OTC.
+The goal is to keep OTC-specific behavior opt-in while leaving the default
+OpenStack behavior unchanged.
+
+| Change | Why it was added |
+| --- | --- |
+| OTC image creation method | Adds `image_creation_method = "otc"` to create the final image through OTC IMS instead of the generic Nova/Cinder/Glance flow. The stock flow uses Nova snapshots, Cinder upload-to-image, and Glance follow-up calls. On OTC, that can hit endpoint or behavior differences and may fail or produce images that do not boot cleanly. This addition also includes IMS endpoint handling, Enterprise Project support, OTC tag forwarding, metadata validation, and the required block-storage guard. |
 
 ## Installation
 
@@ -26,7 +38,6 @@ packer {
 }
 ```
 
-
 #### Manual installation
 
 You can find pre-built binary releases of the plugin [here](https://github.com/hashicorp/packer-plugin-openstack/releases).
@@ -34,7 +45,6 @@ Once you have downloaded the latest archive corresponding to your target OS,
 uncompress it to retrieve the plugin binary file corresponding to your platform.
 To install the plugin, please follow the Packer documentation on
 [installing a plugin](https://www.packer.io/docs/extending/plugins/#installing-plugins).
-
 
 ### From Sources
 
@@ -45,12 +55,10 @@ binary file can be found in the root directory.
 To install the compiled plugin, please follow the official Packer documentation
 on [installing a plugin](https://www.packer.io/docs/extending/plugins/#installing-plugins).
 
-
 ### Configuration
 
 For more information on how to configure the plugin, please read the
 documentation located in the [`docs/`](docs) directory.
-
 
 ## Contributing
 
