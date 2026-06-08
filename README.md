@@ -14,6 +14,8 @@ OpenStack behavior unchanged.
 | --- | --- |
 | OTC image creation method | Adds `image_creation_method = "otc"` to create the final image through OTC IMS instead of the generic Nova/Cinder/Glance flow. The stock flow uses Nova snapshots, Cinder upload-to-image, and Glance follow-up calls. On OTC, that can hit endpoint or behavior differences and may fail or produce images that do not boot cleanly. This addition also includes IMS endpoint handling, Enterprise Project support, OTC tag forwarding, metadata validation, and the required block-storage guard. |
 
+This fork starts at v1.2.0 and is based on the upstream OpenStack plugin. Upstream changes will be merged in as needed.
+
 ## Installation
 
 ### Using pre-built releases
@@ -30,9 +32,9 @@ Then, run [`packer init`](https://www.packer.io/docs/commands/init).
 ```hcl
 packer {
   required_plugins {
-    openstack = {
+    openstack-otc = {
       version = ">= 1.1.3"
-      source  = "github.com/hashicorp/openstack"
+      source  = "github.com/tobiwo/openstack-otc"
     }
   }
 }
@@ -40,7 +42,7 @@ packer {
 
 #### Manual installation
 
-You can find pre-built binary releases of the plugin [here](https://github.com/hashicorp/packer-plugin-openstack/releases).
+You can find pre-built binary releases of the plugin [here](https://github.com/tobiwo/packer-plugin-openstack-otc/releases).
 Once you have downloaded the latest archive corresponding to your target OS,
 uncompress it to retrieve the plugin binary file corresponding to your platform.
 To install the plugin, please follow the Packer documentation on
@@ -50,7 +52,7 @@ To install the plugin, please follow the Packer documentation on
 
 If you prefer to build the plugin from sources, clone the GitHub repository
 locally and run the command `go build` from the root
-directory. Upon successful compilation, a `packer-plugin-openstack` plugin
+directory. Upon successful compilation, a `packer-plugin-openstack-otc` plugin
 binary file can be found in the root directory.
 To install the compiled plugin, please follow the official Packer documentation
 on [installing a plugin](https://www.packer.io/docs/extending/plugins/#installing-plugins).

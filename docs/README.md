@@ -14,9 +14,9 @@ Then, run [`packer init`](https://www.packer.io/docs/commands/init).
 ```hcl
 packer {
   required_plugins {
-    openstack = {
+    openstack-otc = {
       version = "~> 1"
-      source  = "github.com/hashicorp/openstack"
+      source  = "github.com/tobiwo/openstack-otc"
     }
   }
 }
@@ -25,11 +25,11 @@ packer {
 Alternatively, you can use `packer plugins install` to manage installation of this plugin.
 
 ```sh
-$ packer plugins install github.com/hashicorp/openstack
+$ packer plugins install github.com/tobiwo/openstack-otc
 ```
 
 ### Components
 
 #### Builder
 
-- [builder](/packer/integrations/hashicorp/openstack/latest/components/builder/openstack) - The OpenStack Packer builder is able to create new images for use with OpenStack.
+- [builder](/packer/integrations/tobiwo/openstack-otc/latest/components/builder/openstack-otc) - The OpenStack Packer builder is able to create new images for use with OpenStack.
