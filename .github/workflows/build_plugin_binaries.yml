@@ -1,7 +1,7 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-name: hashicorp/packer-plugin-openstack/build_plugin_binaries
+name: tobiwo/packer-plugin-openstack-otc/build_plugin_binaries
 permissions:
   contents: read
 on:
@@ -12,10 +12,10 @@ jobs:
   build_darwin:
     defaults:
       run:
-        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-openstack
+        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
     runs-on: ubuntu-latest
     container:
-      image: docker.mirror.hashicorp.services/cimg/go:1.21
+      image: cimg/go:1.23
     steps:
     - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
     - uses: "./.github/actions/build-and-persist-plugin-binary"
@@ -29,10 +29,10 @@ jobs:
   build_freebsd:
     defaults:
       run:
-        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-openstack
+        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
     runs-on: ubuntu-latest
     container:
-      image: docker.mirror.hashicorp.services/cimg/go:1.21
+      image: cimg/go:1.23
     steps:
     - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
     - uses: "./.github/actions/build-and-persist-plugin-binary"
@@ -50,10 +50,10 @@ jobs:
   build_linux:
     defaults:
       run:
-        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-openstack
+        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
     runs-on: ubuntu-latest
     container:
-      image: docker.mirror.hashicorp.services/cimg/go:1.21
+      image: cimg/go:1.23
     steps:
     - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
     - uses: "./.github/actions/build-and-persist-plugin-binary"
@@ -75,10 +75,10 @@ jobs:
   build_netbsd:
     defaults:
       run:
-        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-openstack
+        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
     runs-on: ubuntu-latest
     container:
-      image: docker.mirror.hashicorp.services/cimg/go:1.21
+      image: cimg/go:1.23
     steps:
     - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
     - uses: "./.github/actions/build-and-persist-plugin-binary"
@@ -96,10 +96,10 @@ jobs:
   build_openbsd:
     defaults:
       run:
-        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-openstack
+        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
     runs-on: ubuntu-latest
     container:
-      image: docker.mirror.hashicorp.services/cimg/go:1.21
+      image: cimg/go:1.23
     steps:
     - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
     - uses: "./.github/actions/build-and-persist-plugin-binary"
@@ -117,10 +117,10 @@ jobs:
   build_solaris:
     defaults:
       run:
-        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-openstack
+        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
     runs-on: ubuntu-latest
     container:
-      image: docker.mirror.hashicorp.services/cimg/go:1.21
+      image: cimg/go:1.23
     steps:
     - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
     - uses: "./.github/actions/build-and-persist-plugin-binary"
@@ -130,10 +130,10 @@ jobs:
   build_windows:
     defaults:
       run:
-        working-directory: ~/go/src/github.com/hashicorp/packer-plugin-openstack
+        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
     runs-on: ubuntu-latest
     container:
-      image: docker.mirror.hashicorp.services/cimg/go:1.21
+      image: cimg/go:1.23
     steps:
     - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
     - uses: "./.github/actions/build-and-persist-plugin-binary"
@@ -148,10 +148,10 @@ jobs:
   build_linux_ppc64le:
     defaults:
       run:
-        working-directory: ~go/src/github.com/hashicorp/packer-plugin-openstack
+        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
     runs-on: ubuntu-latest
     container:
-      image: docker.mirror.hashicorp.services/cimg/go:1.21
+      image: cimg/go:1.23
     steps:
     - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
     - uses: "./.github/actions/build-and-persist-plugin-binary"
