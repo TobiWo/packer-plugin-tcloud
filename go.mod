@@ -1,4 +1,4 @@
-module github.com/hashicorp/packer-plugin-openstack
+module github.com/tobiwo/packer-plugin-openstack-otc
 
 go 1.23.0
 

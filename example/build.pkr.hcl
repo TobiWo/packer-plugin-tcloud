@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MPL-2.0
 
 
-source "openstack" "example" {
+source "openstack-otc" "example" {
   domain_name       = "Default"
   flavor            = "m1.tiny"
   identity_endpoint = "http://<devstack-ip>:5000/v3"
@@ -17,5 +17,5 @@ source "openstack" "example" {
 }
 
 build {
-  sources = ["source.openstack.example"]
+  sources = ["source.openstack-otc.example"]
 }
