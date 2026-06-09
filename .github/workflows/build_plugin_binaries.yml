@@ -2,159 +2,79 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name: tobiwo/packer-plugin-openstack-otc/build_plugin_binaries
+
 permissions:
   contents: read
+
 on:
   push:
     branches:
-    - main
-jobs:
-  build_darwin:
-    defaults:
-      run:
-        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
-    runs-on: ubuntu-latest
-    container:
-      image: cimg/go:1.23
-    steps:
-    - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: darwin
-        GOARCH: amd64
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: darwin
-        GOARCH: arm64
-  build_freebsd:
-    defaults:
-      run:
-        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
-    runs-on: ubuntu-latest
-    container:
-      image: cimg/go:1.23
-    steps:
-    - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: freebsd
-        GOARCH: 386
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: freebsd
-        GOARCH: amd64
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: freebsd
-        GOARCH: arm
-  build_linux:
-    defaults:
-      run:
-        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
-    runs-on: ubuntu-latest
-    container:
-      image: cimg/go:1.23
-    steps:
-    - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: linux
-        GOARCH: 386
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: linux
-        GOARCH: amd64
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: linux
-        GOARCH: arm
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: linux
-        GOARCH: arm64
-  build_netbsd:
-    defaults:
-      run:
-        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
-    runs-on: ubuntu-latest
-    container:
-      image: cimg/go:1.23
-    steps:
-    - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: netbsd
-        GOARCH: 386
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: netbsd
-        GOARCH: amd64
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: netbsd
-        GOARCH: arm
-  build_openbsd:
-    defaults:
-      run:
-        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
-    runs-on: ubuntu-latest
-    container:
-      image: cimg/go:1.23
-    steps:
-    - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: openbsd
-        GOARCH: 386
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: openbsd
-        GOARCH: amd64
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: openbsd
-        GOARCH: arm
-  build_solaris:
-    defaults:
-      run:
-        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
-    runs-on: ubuntu-latest
-    container:
-      image: cimg/go:1.23
-    steps:
-    - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: solaris
-        GOARCH: amd64
-  build_windows:
-    defaults:
-      run:
-        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
-    runs-on: ubuntu-latest
-    container:
-      image: cimg/go:1.23
-    steps:
-    - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: windows
-        GOARCH: 386
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: windows
-        GOARCH: amd64
+      - main
 
-  build_linux_ppc64le:
-    defaults:
-      run:
-        working-directory: ~/go/src/github.com/tobiwo/packer-plugin-openstack-otc
+jobs:
+  build:
+    name: Build ${{ matrix.goos }} ${{ matrix.goarch }}
     runs-on: ubuntu-latest
-    container:
-      image: cimg/go:1.23
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - goos: darwin
+            goarch: amd64
+          - goos: darwin
+            goarch: arm64
+          - goos: freebsd
+            goarch: "386"
+          - goos: freebsd
+            goarch: amd64
+          - goos: freebsd
+            goarch: arm
+          - goos: linux
+            goarch: "386"
+          - goos: linux
+            goarch: amd64
+          - goos: linux
+            goarch: arm
+          - goos: linux
+            goarch: arm64
+          - goos: linux
+            goarch: ppc64le
+          - goos: netbsd
+            goarch: "386"
+          - goos: netbsd
+            goarch: amd64
+          - goos: netbsd
+            goarch: arm
+          - goos: openbsd
+            goarch: "386"
+          - goos: openbsd
+            goarch: amd64
+          - goos: openbsd
+            goarch: arm
+          - goos: solaris
+            goarch: amd64
+          - goos: windows
+            goarch: "386"
+          - goos: windows
+            goarch: amd64
     steps:
-    - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
-    - uses: "./.github/actions/build-and-persist-plugin-binary"
-      with:
-        GOOS: linux
-        GOARCH: ppc64le
+      - uses: actions/checkout@v6
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+          cache-dependency-path: go.sum
+      - name: Build plugin
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: |
+          mkdir -p pkg
+          artifact="packer_plugin_openstack_otc_${GOOS}_${GOARCH}"
+          go build -o "./pkg/${artifact}" .
+          zip "./pkg/${artifact}.zip" "./pkg/${artifact}"
+          rm "./pkg/${artifact}"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: packer_plugin_openstack_otc_${{ matrix.goos }}_${{ matrix.goarch }}.zip
+          path: pkg/packer_plugin_openstack_otc_${{ matrix.goos }}_${{ matrix.goarch }}.zip
+          retention-days: 30
