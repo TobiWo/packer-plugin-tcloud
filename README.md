@@ -13,6 +13,7 @@ OpenStack behavior unchanged.
 | Change | Why it was added |
 | --- | --- |
 | OTC image creation method | Adds `image_creation_method = "otc"` to create the final image through OTC IMS instead of the generic Nova/Cinder/Glance flow. The stock flow uses Nova snapshots, Cinder upload-to-image, and Glance follow-up calls. On OTC, that can hit endpoint or behavior differences and may fail or produce images that do not boot cleanly. This addition also includes IMS endpoint handling, Enterprise Project support, OTC tag forwarding, metadata validation, and the required block-storage guard. |
+| OTC AK/SK authentication | Adds `otc_access_key` and `otc_secret_key` as an opt-in OTC authentication method. The plugin exchanges the keys for a project-scoped Keystone token through OTC's `hw_ak_sk` identity method, then continues to use normal OpenStack service clients with `X-Auth-Token`. This removes the need for wrapper scripts that fetch a token before running Packer while keeping token, password, application credential, and `clouds.yaml` authentication unchanged. |
 
 This fork starts at v1.2.0 and is based on the upstream OpenStack plugin. Upstream changes will be merged in as needed.
 
