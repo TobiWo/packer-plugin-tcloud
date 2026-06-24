@@ -1,4 +1,4 @@
-module github.com/tobiwo/packer-plugin-openstack-otc
+module github.com/opentelekomcloud-community/packer-plugin-tcloud
 
 go 1.23.0
 

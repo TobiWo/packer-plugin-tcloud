@@ -1,7 +1,7 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-name: tobiwo/packer-plugin-openstack-otc/build_plugin_binaries
+name: opentelekomcloud-community/packer-plugin-tcloud/build_plugin_binaries
 
 permissions:
   contents: read
@@ -69,12 +69,12 @@ jobs:
           GOARCH: ${{ matrix.goarch }}
         run: |
           mkdir -p pkg
-          artifact="packer_plugin_openstack_otc_${GOOS}_${GOARCH}"
+          artifact="packer_plugin_tcloud_${GOOS}_${GOARCH}"
           go build -o "./pkg/${artifact}" .
           zip "./pkg/${artifact}.zip" "./pkg/${artifact}"
           rm "./pkg/${artifact}"
       - uses: actions/upload-artifact@v7
         with:
-          name: packer_plugin_openstack_otc_${{ matrix.goos }}_${{ matrix.goarch }}.zip
-          path: pkg/packer_plugin_openstack_otc_${{ matrix.goos }}_${{ matrix.goarch }}.zip
+          name: packer_plugin_tcloud_${{ matrix.goos }}_${{ matrix.goarch }}.zip
+          path: pkg/packer_plugin_tcloud_${{ matrix.goos }}_${{ matrix.goarch }}.zip
           retention-days: 30

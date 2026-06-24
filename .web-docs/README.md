@@ -14,9 +14,9 @@ Then, run [`packer init`](https://www.packer.io/docs/commands/init).
 ```hcl
 packer {
   required_plugins {
-    openstack-otc = {
+    tcloud = {
       version = "~> 1"
-      source  = "github.com/tobiwo/openstack-otc"
+      source  = "github.com/opentelekomcloud-community/tcloud"
     }
   }
 }
@@ -25,11 +25,11 @@ packer {
 Alternatively, you can use `packer plugins install` to manage installation of this plugin.
 
 ```sh
-$ packer plugins install github.com/tobiwo/openstack-otc
+$ packer plugins install --path <PATH_TO_EXTRACTED_PLUGIN_BINARY> github.com/opentelekomcloud-community/tcloud
 ```
 
 ### Components
 
 #### Builder
 
-- [builder](/packer/integrations/tobiwo/openstack-otc/latest/components/builder/openstack-otc) - The OpenStack Packer builder is able to create new images for use with OpenStack.
+- [builder](/packer/integrations/opentelekomcloud-community/tcloud/latest/components/builder/tcloud) - The OpenStack Packer builder is able to create new images for use with OpenStack.
