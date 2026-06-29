@@ -91,6 +91,12 @@ type AccessConfig struct {
 	// for more information about `clouds.yaml` files. If omitted, the
 	// `OS_CLOUD` environment variable is used.
 	Cloud string `mapstructure:"cloud" required:"false"`
+	// The OTC access key to exchange for a project-scoped token. If omitted,
+	// the OTC_ACCESS_KEY environment variable is used.
+	OTCAccessKey string `mapstructure:"otc_access_key" required:"false"`
+	// The OTC secret key to exchange for a project-scoped token. If omitted,
+	// the OTC_SECRET_KEY environment variable is used.
+	OTCSecretKey string `mapstructure:"otc_secret_key" required:"false"`
 
 	osClient *gophercloud.ProviderClient
 }
@@ -134,6 +140,7 @@ func (c *AccessConfig) Prepare(ctx *interpolate.Context) []error {
 	if c.ClientKeyFile == "" {
 		c.ClientKeyFile = os.Getenv("OS_KEY")
 	}
+	c.loadOTCAKSKFromEnv()
 
 	clientOpts := new(clientconfig.ClientOpts)
 
@@ -194,6 +201,13 @@ func (c *AccessConfig) Prepare(ctx *interpolate.Context) []error {
 			*s.To = *s.From
 		}
 	}
+	if c.TenantID == "" {
+		c.TenantID = ao.TenantID
+	}
+
+	if err := c.validateOTCAKSKAuth(); err != nil {
+		return []error{err}
+	}
 
 	// Build the client itself
 	client, err := openstack.NewClient(ao.IdentityEndpoint)
@@ -233,7 +247,11 @@ func (c *AccessConfig) Prepare(ctx *interpolate.Context) []error {
 	client.HTTPClient.Transport = transport
 
 	// Auth
-	err = openstack.Authenticate(client, *ao)
+	if c.usesOTCAKSKAuth() {
+		err = c.authenticateOTCAKSK(client)
+	} else {
+		err = openstack.Authenticate(client, *ao)
+	}
 	if err != nil {
 		return []error{err}
 	}
@@ -249,6 +267,57 @@ func (c *AccessConfig) enableDebug(ui packersdk.Ui) {
 			rt: c.osClient.HTTPClient.Transport,
 		},
 	}
+}
+
+func (c *AccessConfig) loadOTCAKSKFromEnv() {
+	if c.OTCAccessKey == "" {
+		c.OTCAccessKey = os.Getenv("OTC_ACCESS_KEY")
+	}
+	if c.OTCSecretKey == "" {
+		c.OTCSecretKey = os.Getenv("OTC_SECRET_KEY")
+	}
+}
+
+func (c *AccessConfig) validateOTCAKSKAuth() error {
+	if c.OTCAccessKey == "" && c.OTCSecretKey == "" {
+		return nil
+	}
+	if c.OTCAccessKey == "" || c.OTCSecretKey == "" {
+		return fmt.Errorf("otc_access_key and otc_secret_key must be provided together")
+	}
+	if c.TenantID == "" {
+		return fmt.Errorf("tenant_id must be specified when using OTC AK/SK authentication")
+	}
+	if c.Token != "" {
+		return fmt.Errorf("OTC AK/SK authentication cannot be combined with token")
+	}
+	if c.Username != "" || c.Password != "" || c.UserID != "" {
+		return fmt.Errorf("OTC AK/SK authentication cannot be combined with username/password")
+	}
+	if c.ApplicationCredentialID != "" || c.ApplicationCredentialName != "" || c.ApplicationCredentialSecret != "" {
+		return fmt.Errorf("OTC AK/SK authentication cannot be combined with application credentials")
+	}
+	if c.Cloud != "" {
+		return fmt.Errorf("OTC AK/SK authentication cannot be combined with cloud")
+	}
+	return nil
+}
+
+func (c *AccessConfig) usesOTCAKSKAuth() bool {
+	return c.OTCAccessKey != "" && c.OTCSecretKey != ""
+}
+
+func (c *AccessConfig) registerSecrets() {
+	secrets := []string{
+		c.Password,
+		c.Token,
+		c.ApplicationCredentialSecret,
+		c.OTCSecretKey,
+	}
+	if c.osClient != nil {
+		secrets = append(secrets, c.osClient.Token())
+	}
+	packersdk.LogSecretFilter.Set(secrets...)
 }
 
 func (c *AccessConfig) computeV2Client() (*gophercloud.ServiceClient, error) {

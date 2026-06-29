@@ -38,6 +38,8 @@ type FlatConfig struct {
 	ApplicationCredentialID       *string                 `mapstructure:"application_credential_id" required:"false" cty:"application_credential_id" hcl:"application_credential_id"`
 	ApplicationCredentialSecret   *string                 `mapstructure:"application_credential_secret" required:"false" cty:"application_credential_secret" hcl:"application_credential_secret"`
 	Cloud                         *string                 `mapstructure:"cloud" required:"false" cty:"cloud" hcl:"cloud"`
+	OTCAccessKey                  *string                 `mapstructure:"otc_access_key" required:"false" cty:"otc_access_key" hcl:"otc_access_key"`
+	OTCSecretKey                  *string                 `mapstructure:"otc_secret_key" required:"false" cty:"otc_secret_key" hcl:"otc_secret_key"`
 	ImageName                     *string                 `mapstructure:"image_name" required:"true" cty:"image_name" hcl:"image_name"`
 	ImageMetadata                 map[string]string       `mapstructure:"metadata" required:"false" cty:"metadata" hcl:"metadata"`
 	ImageVisibility               *images.ImageVisibility `mapstructure:"image_visibility" required:"false" cty:"image_visibility" hcl:"image_visibility"`
@@ -174,6 +176,8 @@ func (*FlatConfig) HCL2Spec() map[string]hcldec.Spec {
 		"application_credential_id":        &hcldec.AttrSpec{Name: "application_credential_id", Type: cty.String, Required: false},
 		"application_credential_secret":    &hcldec.AttrSpec{Name: "application_credential_secret", Type: cty.String, Required: false},
 		"cloud":                            &hcldec.AttrSpec{Name: "cloud", Type: cty.String, Required: false},
+		"otc_access_key":                   &hcldec.AttrSpec{Name: "otc_access_key", Type: cty.String, Required: false},
+		"otc_secret_key":                   &hcldec.AttrSpec{Name: "otc_secret_key", Type: cty.String, Required: false},
 		"image_name":                       &hcldec.AttrSpec{Name: "image_name", Type: cty.String, Required: false},
 		"metadata":                         &hcldec.AttrSpec{Name: "metadata", Type: cty.Map(cty.String), Required: false},
 		"image_visibility":                 &hcldec.AttrSpec{Name: "image_visibility", Type: cty.String, Required: false},
