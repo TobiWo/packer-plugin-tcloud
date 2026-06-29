@@ -1,4 +1,4 @@
-// Copyright IBM Corp. 2013, 2025
+// Copyright IBM Corp. 2013, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package openstack
@@ -86,7 +86,7 @@ func (s *StepSourceImageInfo) Run(ctx context.Context, state multistep.StateBag)
 		}
 
 		for image.Status != images.ImageStatusActive {
-			ui.Message("Image not Active, retrying in 10 seconds")
+			ui.Say("Image not Active, retrying in 10 seconds")
 			time.Sleep(10 * time.Second)
 
 			img, err := images.Get(client, image.ID).Extract()
@@ -173,7 +173,7 @@ func (s *StepSourceImageInfo) Run(ctx context.Context, state multistep.StateBag)
 		return multistep.ActionHalt
 	}
 
-	ui.Message(fmt.Sprintf("Found Image ID: %s", image.ID))
+	ui.Say(fmt.Sprintf("Found Image ID: %s", image.ID))
 
 	state.Put("source_image", image.ID)
 	return multistep.ActionContinue

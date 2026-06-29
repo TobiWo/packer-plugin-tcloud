@@ -1,4 +1,4 @@
-// Copyright IBM Corp. 2013, 2025
+// Copyright IBM Corp. 2013, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package openstack
@@ -57,7 +57,7 @@ func (s *StepLoadFlavor) Run(ctx context.Context, state multistep.StateBag) mult
 		flavor = &flavors.Flavor{ID: id}
 	}
 
-	ui.Message(fmt.Sprintf("Verified flavor. ID: %s", flavor.ID))
+	ui.Say(fmt.Sprintf("Verified flavor. ID: %s", flavor.ID))
 	state.Put("flavor_id", flavor.ID)
 	return multistep.ActionContinue
 }

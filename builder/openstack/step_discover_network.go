@@ -1,4 +1,4 @@
-// Copyright IBM Corp. 2013, 2025
+// Copyright IBM Corp. 2013, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package openstack
@@ -47,7 +47,7 @@ func (s *StepDiscoverNetwork) Run(ctx context.Context, state multistep.StateBag)
 			return multistep.ActionHalt
 		}
 
-		ui.Message(fmt.Sprintf("Found network ID: %s", networkID))
+		ui.Say(fmt.Sprintf("Found network ID: %s", networkID))
 		networks = append(networks, servers.Network{UUID: networkID})
 	}
 

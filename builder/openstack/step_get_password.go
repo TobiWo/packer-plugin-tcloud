@@ -1,4 +1,4 @@
-// Copyright IBM Corp. 2013, 2025
+// Copyright IBM Corp. 2013, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package openstack
@@ -71,12 +71,12 @@ func (s *StepGetPassword) Run(ctx context.Context, state multistep.StateBag) mul
 		time.Sleep(5 * time.Second)
 	}
 
-	ui.Message("Password retrieved!")
+	ui.Say("Password retrieved!")
 	s.Comm.WinRMPassword = password
 
 	// In debug-mode, we output the password
 	if s.Debug {
-		ui.Message(fmt.Sprintf(
+		ui.Say(fmt.Sprintf(
 			"Password (since debug is enabled) \"%s\"", s.Comm.WinRMPassword))
 	}
 

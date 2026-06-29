@@ -211,7 +211,7 @@ builder.
   shared.
 
 - `image_auto_accept_members` (bool) - When true, perform the image accept so the members can see the image in their
-  project. This requires a user with priveleges both in the build project and
+  project. This requires a user with privileges both in the build project and
   in the members provided. Defaults to false.
 
 - `image_disk_format` (string) - Disk format of the resulting image. This option works if
@@ -331,6 +331,8 @@ builder.
 - `openstack_provider` (string) - Not really used, but here for BC
 
 - `use_floating_ip` (bool) - *Deprecated* use `floating_ip` or `floating_ip_pool` instead.
+
+- `image_creation_wait` (int) - Additional wait time in seconds after the image reaches `active` status (default: 0).
 
 <!-- End of code generated from the comments of the RunConfig struct in builder/openstack/run_config.go; -->
 

@@ -1,4 +1,4 @@
-// Copyright IBM Corp. 2013, 2025
+// Copyright IBM Corp. 2013, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package openstack
@@ -43,7 +43,7 @@ func (s *StepStopServer) Run(ctx context.Context, state multistep.StateBag) mult
 		}
 	}
 
-	ui.Message(fmt.Sprintf("Waiting for server to stop: %s ...", server.ID))
+	ui.Say(fmt.Sprintf("Waiting for server to stop: %s ...", server.ID))
 	stateChange := StateChangeConf{
 		Pending:   []string{"ACTIVE"},
 		Target:    []string{"SHUTOFF", "STOPPED"},

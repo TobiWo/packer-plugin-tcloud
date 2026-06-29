@@ -1,4 +1,4 @@
-// Copyright IBM Corp. 2013, 2025
+// Copyright IBM Corp. 2013, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package openstack
@@ -88,7 +88,7 @@ func (s *StepCreateVolume) Run(ctx context.Context, state multistep.StateBag) mu
 	}
 
 	// Set the Volume ID in the state.
-	ui.Message(fmt.Sprintf("Volume ID: %s", volume.ID))
+	ui.Say(fmt.Sprintf("Volume ID: %s", volume.ID))
 	state.Put("volume_id", volume.ID)
 
 	return multistep.ActionContinue

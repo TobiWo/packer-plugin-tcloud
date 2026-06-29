@@ -1,4 +1,4 @@
-// Copyright IBM Corp. 2013, 2025
+// Copyright IBM Corp. 2013, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 //go:generate packer-sdc struct-markdown
@@ -32,7 +32,7 @@ type ImageConfig struct {
 	// shared.
 	ImageMembers []string `mapstructure:"image_members" required:"false"`
 	// When true, perform the image accept so the members can see the image in their
-	// project. This requires a user with priveleges both in the build project and
+	// project. This requires a user with privileges both in the build project and
 	// in the members provided. Defaults to false.
 	ImageAutoAcceptMembers bool `mapstructure:"image_auto_accept_members" required:"false"`
 	// Disk format of the resulting image. This option works if
