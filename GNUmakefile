@@ -1,4 +1,4 @@
-NAME=openstack-otc
+NAME=tcloud
 BINARY=packer-plugin-${NAME}
 PLUGIN_FQN="$(shell grep -E '^module' <go.mod | sed -E 's/module *//')"
 

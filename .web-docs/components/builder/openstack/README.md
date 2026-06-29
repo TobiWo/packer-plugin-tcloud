@@ -580,7 +580,7 @@ VM.
 **HCL2**
 
 ```hcl
-source "openstack-otc" "example" {
+source "tcloud" "example" {
   domain_name       = "Default"
   flavor            = "m1.tiny"
   identity_endpoint = "http://<devstack-ip>:5000/v3"
@@ -595,7 +595,7 @@ source "openstack-otc" "example" {
 }
 
 build {
-  sources = ["source.openstack-otc.example"]
+  sources = ["source.tcloud.example"]
 }
 
 ```
@@ -628,7 +628,7 @@ Here is a basic example. This is a working example to build a Ubuntu 12.04 LTS
 
 ```hcl
 
-source "openstack-otc" "example" {
+source "tcloud" "example" {
   flavor       = "2"
   image_name   = "Test image"
   password     = "foo"
@@ -639,7 +639,7 @@ source "openstack-otc" "example" {
 }
 
 build {
-  sources = ["source.openstack-otc.example"]
+  sources = ["source.tcloud.example"]
 }
 ```
 
@@ -667,7 +667,7 @@ by Metacloud.
 **HCL2**
 
 ```hcl
-source "openstack-otc" "example" {
+source "tcloud" "example" {
   flavor       = "2"
   image_name   = "ubuntu1404_packer_test_1"
   source_image = "91d9c168-d1e5-49ca-a775-3bfdbb6c97f1"
@@ -675,7 +675,7 @@ source "openstack-otc" "example" {
 }
 
 build {
-  sources = ["source.openstack-otc.example"]
+  sources = ["source.tcloud.example"]
 }
 ```
 
@@ -747,7 +747,7 @@ by Selectel VPC.
 
 ```hcl
 
-source "openstack-otc" "example" {
+source "tcloud" "example" {
   availability_zone       = "ru-3a"
   flavor                  = "1001"
   identity_endpoint       = "https://api.selvpc.com/identity/v3"
@@ -764,7 +764,7 @@ source "openstack-otc" "example" {
 }
 
 build {
-  sources = ["source.openstack-otc.example"]
+  sources = ["source.tcloud.example"]
 }
 
 ```

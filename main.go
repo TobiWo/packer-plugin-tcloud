@@ -9,8 +9,8 @@ import (
 
 	"github.com/hashicorp/packer-plugin-sdk/plugin"
 
-	"github.com/tobiwo/packer-plugin-openstack-otc/builder/openstack"
-	"github.com/tobiwo/packer-plugin-openstack-otc/version"
+	"github.com/opentelekomcloud-community/packer-plugin-tcloud/builder/openstack"
+	"github.com/opentelekomcloud-community/packer-plugin-tcloud/version"
 )
 
 func main() {

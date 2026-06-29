@@ -1,14 +1,12 @@
-# Packer Plugin Openstack
+# Packer Plugin T-Cloud
 
-The `Openstack` multi-component plugin can be used with HashiCorp [Packer](https://www.packer.io)
+The `T-Cloud` plugin can be used with HashiCorp [Packer](https://www.packer.io)
 to create custom images. For the full list of available features for this plugin see [docs](docs).
 
 ## About this fork
 
-This fork keeps the upstream OpenStack builder mostly intact, but adds
-targeted changes for T-Cloud Public, formerly Open Telekom Cloud or OTC.
-The goal is to keep OTC-specific behavior opt-in while leaving the default
-OpenStack behavior unchanged.
+This repo forks the official [Packer OpenStack plugin](https://github.com/hashicorp/packer-plugin-openstack). It keeps the upstream OpenStack builder mostly intact, but adds
+targeted changes for T-Cloud Public, formerly Open Telekom Cloud or OTC. The goal is to keep OTC-specific behavior opt-in while leaving the default OpenStack behavior unchanged.
 
 | Change | Why it was added |
 | --- | --- |
@@ -19,41 +17,52 @@ This fork starts at v1.2.0 and is based on the upstream OpenStack plugin. Upstre
 
 ## Installation
 
-### Using pre-built releases
-
-#### Using the `packer init` command
+### Automatic installation with `packer init`
 
 Starting from version 1.7, Packer supports a new `packer init` command allowing
 automatic installation of Packer plugins. Read the
 [Packer documentation](https://www.packer.io/docs/commands/init) for more information.
 
-To install this plugin, copy and paste this code into your Packer configuration .
-Then, run [`packer init`](https://www.packer.io/docs/commands/init).
+Automatic installation is not available for this plugin yet because it is not
+registered for release-based plugin discovery. Use the pre-built release
+workflow below for now.
+
+### Using pre-built releases
+
+Download the latest release archive for your platform from the
+[releases page](https://github.com/opentelekomcloud-community/packer-plugin-tcloud/releases)
+and unzip it in a location of your choice. Then install the extracted plugin
+binary into Packer's plugin directory:
+
+```sh
+packer plugins install --path <PATH_TO_EXTRACTED_PLUGIN_BINARY> github.com/opentelekomcloud-community/tcloud
+```
+
+The `--path` command copies the binary into Packer's plugin directory. The
+original extracted path is only needed during installation; the binary does not
+need to be on your `PATH`.
+
+Add the plugin reference to your Packer configuration:
 
 ```hcl
 packer {
   required_plugins {
-    openstack-otc = {
-      version = ">= 1.1.3"
-      source  = "github.com/tobiwo/openstack-otc"
+    tcloud = {
+      version = ">= 1.2.0"
+      source  = "github.com/opentelekomcloud-community/tcloud"
     }
   }
 }
 ```
 
-#### Manual installation
-
-You can find pre-built binary releases of the plugin [here](https://github.com/tobiwo/packer-plugin-openstack-otc/releases).
-Once you have downloaded the latest archive corresponding to your target OS,
-uncompress it to retrieve the plugin binary file corresponding to your platform.
-To install the plugin, please follow the Packer documentation on
-[installing a plugin](https://www.packer.io/docs/extending/plugins/#installing-plugins).
+Then run [`packer init .`](https://www.packer.io/docs/commands/init) to verify
+the installed plugin satisfies the template requirement.
 
 ### From Sources
 
 If you prefer to build the plugin from sources, clone the GitHub repository
-locally and run the command `go build` from the root
-directory. Upon successful compilation, a `packer-plugin-openstack-otc` plugin
+locally and run `go build -o packer-plugin-tcloud` from the root
+directory. Upon successful compilation, a `packer-plugin-tcloud` plugin
 binary file can be found in the root directory.
 To install the compiled plugin, please follow the official Packer documentation
 on [installing a plugin](https://www.packer.io/docs/extending/plugins/#installing-plugins).
