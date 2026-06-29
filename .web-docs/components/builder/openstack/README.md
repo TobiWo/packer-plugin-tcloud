@@ -190,6 +190,12 @@ builder.
   for more information about `clouds.yaml` files. If omitted, the
   `OS_CLOUD` environment variable is used.
 
+- `otc_access_key` (string) - The OTC access key to exchange for a project-scoped token. If omitted,
+  the OTC_ACCESS_KEY environment variable is used.
+
+- `otc_secret_key` (string) - The OTC secret key to exchange for a project-scoped token. If omitted,
+  the OTC_SECRET_KEY environment variable is used.
+
 <!-- End of code generated from the comments of the AccessConfig struct in builder/openstack/access_config.go; -->
 
 
