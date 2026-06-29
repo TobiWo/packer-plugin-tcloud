@@ -195,7 +195,8 @@ builder.
 
 <!-- Code generated from the comments of the ImageConfig struct in builder/openstack/image_config.go; DO NOT EDIT MANUALLY -->
 
-- `metadata` (map[string]string) - Glance metadata that will be applied to the image.
+- `metadata` (map[string]string) - Glance metadata applied to OpenStack-created images. Not supported with
+  image_creation_method "otc".
 
 - `image_visibility` (imageservice.ImageVisibility) - One of "public", "private", "shared", or "community".
 
@@ -213,6 +214,14 @@ builder.
 - `image_tags` ([]string) - List of tags to add to the image after creation.
 
 - `image_min_disk` (int) - Minimum disk size needed to boot image, in gigabytes.
+
+- `image_creation_method` (string) - Image creation method. Defaults to "openstack". Set to "otc" to create
+  an OTC/T-Cloud Public IMS system disk image from the stopped build ECS.
+
+- `otc_ims_endpoint` (string) - OTC IMS API endpoint. Defaults to https://ims.&lt;region&gt;.otc.t-systems.com
+  when omitted.
+
+- `otc_enterprise_project_id` (string) - OTC enterprise project ID assigned to the IMS image. Omitted when empty.
 
 - `skip_create_image` (bool) - Skip creating the image. Useful for setting to `true` during a build test stage. Defaults to `false`.
 
@@ -565,7 +574,7 @@ VM.
 **HCL2**
 
 ```hcl
-source "openstack" "example" {
+source "openstack-otc" "example" {
   domain_name       = "Default"
   flavor            = "m1.tiny"
   identity_endpoint = "http://<devstack-ip>:5000/v3"
@@ -580,7 +589,7 @@ source "openstack" "example" {
 }
 
 build {
-  sources = ["source.openstack.example"]
+  sources = ["source.openstack-otc.example"]
 }
 
 ```
@@ -613,7 +622,7 @@ Here is a basic example. This is a working example to build a Ubuntu 12.04 LTS
 
 ```hcl
 
-source "openstack" "example" {
+source "openstack-otc" "example" {
   flavor       = "2"
   image_name   = "Test image"
   password     = "foo"
@@ -624,7 +633,7 @@ source "openstack" "example" {
 }
 
 build {
-  sources = ["source.openstack.example"]
+  sources = ["source.openstack-otc.example"]
 }
 ```
 
@@ -652,7 +661,7 @@ by Metacloud.
 **HCL2**
 
 ```hcl
-source "openstack" "example" {
+source "openstack-otc" "example" {
   flavor       = "2"
   image_name   = "ubuntu1404_packer_test_1"
   source_image = "91d9c168-d1e5-49ca-a775-3bfdbb6c97f1"
@@ -660,7 +669,7 @@ source "openstack" "example" {
 }
 
 build {
-  sources = ["source.openstack.example"]
+  sources = ["source.openstack-otc.example"]
 }
 ```
 
@@ -732,7 +741,7 @@ by Selectel VPC.
 
 ```hcl
 
-source "openstack" "example" {
+source "openstack-otc" "example" {
   availability_zone       = "ru-3a"
   flavor                  = "1001"
   identity_endpoint       = "https://api.selvpc.com/identity/v3"
@@ -749,7 +758,7 @@ source "openstack" "example" {
 }
 
 build {
-  sources = ["source.openstack.example"]
+  sources = ["source.openstack-otc.example"]
 }
 
 ```
