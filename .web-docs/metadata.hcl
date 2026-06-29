@@ -4,13 +4,13 @@
 # For full specification on the configuration of this file visit:
 # https://github.com/hashicorp/integration-template#metadata-configuration
 integration {
-  name = "OpenStack"
-  description = "The OpenStack multi-component plugin can be used with HashiCorp Packer to create custom images."
-  identifier = "packer/hashicorp/openstack"
+  name = "T-Cloud"
+  description = "The T-Cloud Packer plugin can be used with HashiCorp Packer to create custom images for OpenStack-compatible T-Cloud environments."
+  identifier = "packer/opentelekomcloud-community/tcloud"
   flags = ["hcp-ready"]
   component {
     type = "builder"
-    name = "OpenStack"
-    slug = "openstack"
+    name = "T-Cloud"
+    slug = "tcloud"
   }
 }
