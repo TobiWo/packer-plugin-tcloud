@@ -66,7 +66,7 @@ runtime in order to build packer with the OpenStack plugin.
 
 1. This project always releases from the latest version of golang.
 [Install go](https://golang.org/doc/install#install) To properly build from
-source, you need to have golang >= 1.21
+source, you need to have golang >= 1.23
 
 ## Setting up OpenStack plugin for dev
 
@@ -75,17 +75,17 @@ order to compile and test it. These instructions target
 POSIX-like environments (macOS, Linux, Cygwin, etc.) so you may need to
 adjust them for Windows or other shells.
 
-1. Download the OpenStack plugin source (and its dependencies) by running
-   `go get github.com/hashicorp/packer-plugin-openstack`. This will download the source to
-   `$GOPATH/src/github.com/hashicorp/packer-plugin-openstack`.
+1. Download the OpenStack OTC plugin source (and its dependencies) by running
+   `go get github.com/tobiwo/packer-plugin-openstack-otc`. This will download the source to
+   `$GOPATH/src/github.com/tobiwo/packer-plugin-openstack-otc`.
 
-2. When working on the OpenStack plugin, first `cd $GOPATH/src/github.com/hashicorp/packer-plugin-openstack`
-   so you can run `make dev` and easily access other files. `make dev` will build the packer-plugin-openstack binary and install it under `$HOME/.packer.d/plugins/`.
+2. When working on the OpenStack OTC plugin, first `cd $GOPATH/src/github.com/tobiwo/packer-plugin-openstack-otc`
+   so you can run `make dev` and easily access other files. `make dev` will build the packer-plugin-openstack-otc binary and install it under `$HOME/.packer.d/plugins/`.
 
 3. Make your changes to the OpenStack plugin source. You can run `make dev` to build and install locally, and `make test` to run unit tests.
-   Any compilation errors will be shown when the binaries are rebuilding. If you don't have `make` you can simply run `go build -o packer-plugin-openstack` from the project root, and `mv packer-plugin-openstack ~/.packer.d/plugins/packer-plugin-openstack` to install the plugin.
+   Any compilation errors will be shown when the binaries are rebuilding. If you don't have `make` you can simply run `go build -o packer-plugin-openstack-otc` from the project root, and `mv packer-plugin-openstack-otc ~/.packer.d/plugins/packer-plugin-openstack-otc` to install the plugin.
 
-4. After building the OpenStack plugin successfully, use the latest version of Packer to build a machine and verify your changes. In the [example folder](https://github.com/hashicorp/packer-plugin-openstack/blob/main/example) we provide a basic template. Comment out the `packer {}` block to force Packer use the development binary installed in the previous step.
+4. After building the OpenStack OTC plugin successfully, use the latest version of Packer to build a machine and verify your changes. In the [example folder](https://github.com/tobiwo/packer-plugin-openstack-otc/blob/main/example) we provide a basic template. Comment out the `packer {}` block to force Packer use the development binary installed in the previous step.
 
 5. If everything works well and the tests pass, run `go fmt ./...` on your code before
    submitting a pull-request.
@@ -94,7 +94,7 @@ adjust them for Windows or other shells.
 ### Opening a Pull Request
 
 Thank you for contributing! When you are ready to open a pull-request, you will
-need to [fork the OpenStack plugin](https://github.com/hashicorp/packer-plugin-openstack#fork-destination-box), push your
+need to [fork the OpenStack OTC plugin](https://github.com/tobiwo/packer-plugin-openstack-otc#fork-destination-box), push your
 changes to your fork, and then open a pull-request.
 
 For example, my github username is `myuser`, so I would do the following:
@@ -102,7 +102,7 @@ For example, my github username is `myuser`, so I would do the following:
 ```
 git checkout -b f-my-feature
 # Develop a patch.
-git push https://github.com/myuser/packer-plugin-openstack f-my-feature
+git push https://github.com/myuser/packer-plugin-openstack-otc f-my-feature
 ```
 
 From there, open your fork in your browser to open a new pull-request.
@@ -185,7 +185,7 @@ project. After following the steps in "Setting up Go to work on the OpenStack pl
 
 1. Navigate to the code:
 
-   `cd $GOPATH/src/github.com/hashicorp/packer-plugin-openstack`
+   `cd $GOPATH/src/github.com/tobiwo/packer-plugin-openstack-otc`
 
 2. Add the remote by running:
 
@@ -193,7 +193,7 @@ project. After following the steps in "Setting up Go to work on the OpenStack pl
 
    For example:
 
-   `git remote add myuser https://github.com/myuser/packer-plugin-openstack.git`
+   `git remote add myuser https://github.com/myuser/packer-plugin-openstack-otc.git`
 
 3. Checkout a feature branch:
 

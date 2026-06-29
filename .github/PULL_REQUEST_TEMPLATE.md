@@ -4,7 +4,7 @@ In order to have a good experience with our community, we recommend that you
 read the contributing guidelines for making a PR, and understand the lifecycle
 of a Packer Plugin PR:
 
-https://github.com/hashicorp/packer-plugin-openstack/blob/main/.github/CONTRIBUTING.md#opening-an-pull-request
+https://github.com/tobiwo/packer-plugin-openstack-otc/blob/main/.github/CONTRIBUTING.md#opening-an-pull-request
 
 ----
 
@@ -26,4 +26,3 @@ If a change needs to be reverted, we will roll out an update to the code within 
 ### Changes to Security Controls
 
 Are there any changes to security controls (access controls, encryption, logging) in this pull request? If so, explain.
-
